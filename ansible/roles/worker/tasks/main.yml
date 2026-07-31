@@ -6,6 +6,8 @@
 
 - name: Join the cluster
   command: "{{ hostvars[groups['master'][0]]['k8s_join_command'] }}"
+  register: join_output
+  failed_when: join_output.rc != 0
   when: not kubelet_conf.stat.exists
 
 - name: Label worker node

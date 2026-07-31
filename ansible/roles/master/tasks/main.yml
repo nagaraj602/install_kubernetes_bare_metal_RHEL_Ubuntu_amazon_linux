@@ -5,7 +5,14 @@
   register: kubeadm_conf
 
 - name: Initialize Kubernetes Master
-  command: kubeadm init --pod-network-cidr={{ pod_network_cidr }} --ignore-preflight-errors=NumCPU,Mem
+  command: >
+    kubeadm init 
+    --pod-network-cidr={{ pod_network_cidr }} 
+    --apiserver-advertise-address={{ ansible_default_ipv4.address }} 
+    --cri-socket=unix:///run/containerd/containerd.sock 
+    --ignore-preflight-errors=NumCPU,Mem
+  register: kubeadm_init_output
+  failed_when: kubeadm_init_output.rc != 0
   when: not kubeadm_conf.stat.exists
 
 - name: Create .kube directory for the SSH user
@@ -38,4 +45,4 @@
 
 - name: Set join command as a fact
   set_fact:
-    k8s_join_command: "{{ join_command_raw.stdout }}"
+    k8s_join_command: "{{ join_command_raw.stdout }} --cri-socket=unix:///run/containerd/containerd.sock"

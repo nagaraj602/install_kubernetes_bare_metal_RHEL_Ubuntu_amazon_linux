@@ -25,3 +25,22 @@ variable "master_instance_type" {
 variable "worker_instance_type" {
   default = "t3.medium"
 }
+
+# New variables for Key Pair Logic
+variable "create_new_key" {
+  description = "Boolean to decide whether to create a new key pair"
+  type        = bool
+  default     = true
+}
+
+variable "existing_key_name" {
+  description = "Name of the existing AWS key pair"
+  type        = string
+  default     = ""
+}
+
+variable "private_key_path" {
+  description = "Path to the private key used by Ansible"
+  type        = string
+  default     = "../k8s-generated-key.pem"
+}

@@ -8,7 +8,7 @@
   command: kubeadm init --pod-network-cidr={{ pod_network_cidr }} --ignore-preflight-errors=NumCPU,Mem
   when: not kubeadm_conf.stat.exists
 
-- name: Create .kube directory
+- name: Create .kube directory for the SSH user
   file:
     path: /home/{{ ansible_user }}/.kube
     state: directory

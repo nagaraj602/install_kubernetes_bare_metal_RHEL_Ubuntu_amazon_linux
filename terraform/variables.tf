@@ -1,5 +1,5 @@
 variable "aws_region" {
-  default = "us-east-1"
+  default = "us-west-2"
 }
 
 variable "os_choice" {
@@ -23,5 +23,5 @@ variable "master_instance_type" {
 }
 
 variable "worker_instance_type" {
-  default = "t3.small"
+  default = "t3.medium"
 }

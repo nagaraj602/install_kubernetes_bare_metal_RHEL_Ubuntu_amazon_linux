@@ -140,7 +140,9 @@
     disable_excludes: kubernetes
   when: ansible_os_family == "RedHat"
 
-- name: Enable kubelet
+- name: Enable and start kubelet
   systemd:
     name: kubelet
     enabled: yes
+    state: started
+    daemon_reload: yes

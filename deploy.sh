@@ -82,6 +82,7 @@ install_aws_cli() {
     echo "Please configure your AWS credentials:"
     aws configure
     echo
+    echo
 }
 
 # Run dependency checks

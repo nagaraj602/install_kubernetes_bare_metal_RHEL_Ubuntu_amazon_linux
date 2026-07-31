@@ -1,4 +1,14 @@
 ---
+- name: Apply master hostname to OS
+  hostname:
+    name: master
+
+- name: Update /etc/hosts with master hostname
+  lineinfile:
+    path: /etc/hosts
+    line: "127.0.1.1 master"
+    state: present
+
 - name: Check if Kubernetes has already been initialized
   stat:
     path: /etc/kubernetes/admin.conf

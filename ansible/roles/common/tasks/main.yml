@@ -68,12 +68,22 @@
     name: containerd.io
     state: present
 
-- name: Configure containerd for SystemdCgroup
-  shell: |
-    containerd config default > /etc/containerd/config.toml
-    sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+- name: Generate default containerd config
+  shell: containerd config default > /etc/containerd/config.toml
   args:
     creates: /etc/containerd/config.toml
+
+- name: Enable CRI plugin in containerd (Fix for Unimplemented Service)
+  replace:
+    path: /etc/containerd/config.toml
+    regexp: '^disabled_plugins \= \["cri"\]'
+    replace: '#disabled_plugins = ["cri"]'
+
+- name: Configure containerd for SystemdCgroup
+  replace:
+    path: /etc/containerd/config.toml
+    regexp: 'SystemdCgroup = false'
+    replace: 'SystemdCgroup = true'
 
 - name: Restart and enable containerd
   systemd:

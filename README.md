@@ -10,7 +10,7 @@ Then installs Kubernetes bare metal on the instance using Ansible and sets the m
 The second option will not create VPC, subnet, igw, route table, and ec2. It creates Security Group with All traffic allowed. This will also give option to select the existing keypair or else, script will create a new one. It will only install Kubernetes bare metal on the instance using Ansible and sets the master and worker node setup automatically.
 —--
 #### Note: 
-In the second option, terraform will use default VPC and if you already have the keypair, then you can mention the public key name saved in AWS in terraform.tfvars file. If you don't have the keypair, then script will create a new one and save the private key in the current directory. 
+In the second option, terraform will use default VPC and if you already have the keypair, then you can mention the public key name saved in AWS in terraform.tfvars file and you need to upload private key to the current directory. If you don't have the keypair, then script will create a new one and save the private key in the current directory. 
 If the keypair was created by script, then it gets deleted automatically when you run destroy.sh script. If you have existing keypair, then it will not delete the keypair when you run destroy.sh script.
 
 ---

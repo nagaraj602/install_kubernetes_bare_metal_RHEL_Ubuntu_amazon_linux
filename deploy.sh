@@ -98,7 +98,7 @@ echo
 # ==========================================
 echo "==> Initializing and Applying Terraform..."
 cd terraform
-terraform init
+terraform init > /dev/null 2>&1
 terraform apply -auto-approve
 
 echo "==> Waiting for EC2 instances to initialize SSH..."

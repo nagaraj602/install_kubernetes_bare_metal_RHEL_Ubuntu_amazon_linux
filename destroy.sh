@@ -4,4 +4,4 @@ set -e
 echo "==> Destroying Terraform Infrastructure..."
 cd terraform
 terraform destroy -auto-approve
-echo "==> Teardown Complete."
+echo "==> Kubernetes Infra Destruction Complete."

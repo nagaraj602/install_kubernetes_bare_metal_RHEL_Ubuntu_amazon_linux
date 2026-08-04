@@ -11,3 +11,9 @@ You can also change the Instance type, the number of worker nodes, and the name 
 To setup Kubernetes in AWS, run:
 ```bash
 bash deploy.sh
+```
+
+To destroy this infrastructure, run:
+```bash
+bash destroy.sh
+```

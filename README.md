@@ -1,4 +1,10 @@
-# install_kubernetes_bare_metal_RHEL_Ubuntu_amazon_linux
+# Install Bare Metal Kubernetes on RHEL/Ubuntu/amazon Linux distribution
+---
+Pre-requisites:
+* If you have existing AWS CLI installation but not configured AWS CLI credentials, please configure it.
+* Make sure you have git installed on your server to clone this Repo.
+* If you want to customize the instance type, existing keypair, number of worker nodes, OS type, then, go to the directory: terraform/terraform.tfvars
+
 ---
 Installing Bare metal Kubernetes automatically on any OS of your choice: RHEL, Amazon Linux, Ubuntu. There are two folders, 
 1) with_seperate_VPC_creation  

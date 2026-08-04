@@ -1,0 +1,19 @@
+---
+- name: Check if node is already joined
+  stat:
+    path: /etc/kubernetes/kubelet.conf
+  register: kubelet_conf
+
+- name: Join the cluster
+  command: "{{ hostvars[groups['master'][0]]['k8s_join_command'] }}"
+  register: join_output
+  failed_when: join_output.rc != 0
+  when: not kubelet_conf.stat.exists
+
+- name: Label worker node
+  command: kubectl label node {{ ansible_hostname }} node-role.kubernetes.io/worker=worker --overwrite
+  delegate_to: "{{ groups['master'][0] }}"
+  become_user: "{{ hostvars[groups['master'][0]]['ansible_user'] }}"
+  environment:
+    KUBECONFIG: /home/{{ hostvars[groups['master'][0]]['ansible_user'] }}/.kube/config
+  when: not kubelet_conf.stat.exists
